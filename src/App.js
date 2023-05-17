@@ -1,17 +1,21 @@
 import './App.css';
 import React from 'react';
-// import Login from './components/LoginUser'
-// import Register from './components/RegisterUser'
-// import * as ReactDOM from 'react-dom/client';
-import Navbar from "./components/NavBar.Js";
-//const axios = require('axios');
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LoginUser from './components/LoginUser';
+import RegisterUser from './components/RegisterUser';
+//import Index from './index.html';
 
 const App = () =>{
   return (
-    <>
-      <Navbar/>         
-    </>
+    <BrowserRouter>
+    <div className="App">
+    </div>
+    <Routes>
+    <Route path="/" element={<LoginUser/>} />
+    <Route path="/register" element={<RegisterUser/>} />
+    <Route  path="/login" element={<LoginUser/>} />
+    </Routes>
+    </BrowserRouter>
   );
 }
 

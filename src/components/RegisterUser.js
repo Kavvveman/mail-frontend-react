@@ -7,23 +7,13 @@ import ReactDOM from 'react-dom'
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = '/register';
+
+
+
 
 function RegisterUser() {
-    // axios.post('/') //Post to spring function for Login User?
-    //     .then(function Create(response) {
-    //         // handle success
-    //         console.log(response);
-    //     })
-    //     .catch(function (error) {
-    //         // handle error
-    //         console.log(error);
-    //     })
-    //     .finally(function () {
-    //         // always executed
-    //     });
 
-
+   // #region constants
     const userRef = useRef();
     const errRef = useRef();
 
@@ -42,25 +32,6 @@ function RegisterUser() {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
-    useEffect(() => {
-        userRef.current.focus();
-    }, [])
-
-    useEffect(() => {
-        setValidName(USER_REGEX.test(user));
-    }, [user])
-
-    useEffect(() => {
-        setValidPwd(PWD_REGEX.test(pwd));
-        setValidMatch(pwd === matchPwd);
-    }, [pwd, matchPwd])
-
-    useEffect(() => {
-        setErrMsg('');
-    }, [user, pwd, matchPwd])
-
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         // if button enabled with JS hack
@@ -71,8 +42,10 @@ function RegisterUser() {
             return;
         }
         try {
-            const response = await axios.post(REGISTER_URL,
-                JSON.stringify({ user, pwd }),
+            const response = await axios.post(
+                JSON.stringify({ 
+                    user, 
+                    pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -103,22 +76,77 @@ function RegisterUser() {
         }
     }
 
+    // #endregion
+
+    // #region states
+    useEffect(() => {
+        userRef.current.focus();
+    }, [])
+
+    useEffect(() => {
+        setValidName(USER_REGEX.test(user));
+    }, [user])
+
+    useEffect(() => {
+        setValidPwd(PWD_REGEX.test(pwd));
+        setValidMatch(pwd === matchPwd);
+    }, [pwd, matchPwd])
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [user, pwd, matchPwd])
+
+    // #endregion
+
+
+    // Functions
+
+    function RegisterUserFunc(
+        //Usernanme
+        user,
+        firstname,
+        surname,
+        email,
+        cellnumber,
+        idNumber,
+        password
+        )
+       {
+        console.log(      
+                    //Usernanme  
+            user,
+            firstname,
+            surname,
+            email,
+            cellnumber,
+            idNumber,
+            password);
+    }
+
     return (
         <div className="App">
             <header >
-                <img />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-          
-                
-                <form onSubmit={handleSubmit}>
+            </header>
+            <main id="main-holder">
+                <form 
+                onSubmit={handleSubmit}
+                method='Post'>
 
-                <label htmlFor="username">
+                <h2> Register as a new User</h2>
+
+
+                {/* Add Username field to database */}
+                <label 
+                className=''
+                htmlFor="username">
                             Username:
-                            <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
-                            <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
-                        </label>
+                            <FontAwesomeIcon 
+                            //icon={faCheck}
+                             className={validPwd ? "valid" : "hide"}   />
+                            <FontAwesomeIcon 
+                            //icon={faTimes}
+                            className={validPwd || !pwd ? "hide" : "invalid"}  />
+                 </label>
                         <input
                             type="text"
                             id="username"
@@ -126,20 +154,111 @@ function RegisterUser() {
                             autoComplete="off"
                             onChange={(e) => setUser(e.target.value)}
                             value={user}
-                            required
+                            require
                             aria-invalid={validName ? "false" : "true"}
                             aria-describedby="uidnote"
                             onFocus={() => setUserFocus(true)}
                             onBlur={() => setUserFocus(false)}
                         />
 
-                        <label htmlFor="password">
-                            Password:
-                            <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} 
-                            />
-                            <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} 
+
+                <label htmlFor="firstname">
+                            First Name:
+                 </label>
+
+                        <input
+                            type="text"
+                            id="firstname"
+                            autoComplete="off"
+                            //onChange={(e) => setUser(e.target.value)}
+                            //value={user}
+                            required
+                           // aria-describedby="uidnote"
+                           // on                    
+                            //onFocus={() => setUserFocus(true)}
+                            //onBlur={() => setUserFocus(false)}
                         />
-                        </label>
+
+
+                <label htmlFor="surname">
+                           Surname:
+                 </label>
+
+                        <input
+                            type="text"
+                            id="surname"
+                            autoComplete="off"
+                            //onChange={(e) => setUser(e.target.value)}
+                            //value={user}
+                            required
+                           // aria-describedby="uidnote"
+                           // on                    
+                            //onFocus={() => setUserFocus(true)}
+                            //onBlur={() => setUserFocus(false)}
+                        />
+
+                <label htmlFor="email">
+                        Email:
+                 </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            autoComplete="off"
+                            //onChange={(e) => setUser(e.target.value)}
+                            //value={user}
+                            required
+                           // aria-describedby="uidnote"
+                           // on                    
+                            //onFocus={() => setUserFocus(true)}
+                            //onBlur={() => setUserFocus(false)}
+                        />  
+
+
+                <label htmlFor="cellnumber">
+                        Cell Phone Number:
+                 </label>
+
+                        <input
+                            type="tel"
+                            id="cellnumber"
+                            autoComplete="off"
+                            //onChange={(e) => setUser(e.target.value)}
+                            //value={user}
+                             required
+                           // aria-describedby="uidnote"
+                           // on                    
+                            //onFocus={() => setUserFocus(true)}
+                            //onBlur={() => setUserFocus(false)}
+                        />  
+
+
+                 <label htmlFor="idNumber">
+                        Cell Phone Number:
+                 </label>
+
+                        <input
+                            type="number"
+                            id="idNumber"
+                            autoComplete="off"
+                            //onChange={(e) => setUser(e.target.value)}
+                            //value={user}
+                             required
+                           // aria-describedby="uidnote"
+                           // on                    
+                            //onFocus={() => setUserFocus(true)}
+                            //onBlur={() => setUserFocus(false)}
+                        />  
+
+                <label htmlFor="password">
+                            Password:
+                            <FontAwesomeIcon 
+                            //icon={faCheck}
+                             className={validPwd ? "valid" : "hide"}   />
+                            <FontAwesomeIcon 
+                            //icon={faTimes}
+                            className={validPwd || !pwd ? "hide" : "invalid"}  />
+                 </label>
                         <input
                             type="password"
                             id="password"
@@ -151,30 +270,26 @@ function RegisterUser() {
                             onFocus={() => setPwdFocus(true)}
                             onBlur={() => setPwdFocus(false)}
                         />
-                        <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
-                            <FontAwesomeIcon icon={faInfoCircle} />
-                            8 to 24 characters.<br />
-                            Must include uppercase and lowercase letters, a number and a special character.<br />
-                            Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
-                        </p>
-                        <button disabled={
-                            !validName ||
-                             !validPwd || 
-                             !validMatch ? true : false}>Sign Up
-                             </button>
+
+                    <i 
+                    class="fa fa-info-circle" 
+                    data-toggle="tooltip" 
+                    title="Must include uppercase and lowercase letters, a number and a special character."  >
+                    </i>
 
 
-                         <p>
-                        Already registered?<br />
-                        <span className="line">
-                            <a href="src/LoginUser.js">Sign In</a>
-                        </span>
-                    </p>
+                    
 
-
+                        <button class="signup-button;" 
+                        onclick={RegisterUserFunc()}>
+                            Signup
+                            </button>
+                     <br/>
+           
              </form>
-
-            </header>
+            <p>Already registered?</p> 
+             <button class="signin-button;">Sign In</button>
+             </main>
         </div>
     );
 }
