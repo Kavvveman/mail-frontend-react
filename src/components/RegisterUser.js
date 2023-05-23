@@ -1,9 +1,10 @@
 import axios from '../api/axios';
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from 'react';
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { render } from '@testing-library/react';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -14,8 +15,8 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 function RegisterUser() {
 
    // #region constants
-    const userRef = useRef();
-    const errRef = useRef();
+   const userRef = useRef();
+   const errRef = useRef();
 
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
@@ -32,6 +33,30 @@ function RegisterUser() {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
+
+    const [firstname, setfirstname] = useState('');
+    const [validfirstname, setvalidfirstname] = useState(false);
+    const [firstnameuserFocus, setfirstnameuserFocus] = useState(false);
+
+    const [surname, setsurname] = useState('');
+    const [validsurname, setvalidsurname] = useState(false);
+    const [surnameuserFocus, setsurnameFocus] = useState(false);
+
+    const [email, setemail] = useState('');
+    const [validemail, setvalidName] = useState(false);
+    const [emailFocus, setemailFocus] = useState(false);
+
+    const [cellnumber, setcellnumber] = useState('');
+    const [validcellnumber, setvalidcellnumbere] = useState(false);
+    const [cellnumberFocus, setcellnumberFocus] = useState(false);
+
+    const [idNumber, setidNumber] = useState('');
+    const [valididNumber, setvalididNumber] = useState(false);
+    const [idNumberFocus, setidNumberFocus] = useState(false);
+
+    // #endregion
+
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         // if button enabled with JS hack
@@ -76,59 +101,52 @@ function RegisterUser() {
         }
     }
 
-    // #endregion
-
-    // #region states
-    useEffect(() => {
-        userRef.current.focus();
-    }, [])
-
-    useEffect(() => {
-        setValidName(USER_REGEX.test(user));
-    }, [user])
-
-    useEffect(() => {
-        setValidPwd(PWD_REGEX.test(pwd));
-        setValidMatch(pwd === matchPwd);
-    }, [pwd, matchPwd])
-
-    useEffect(() => {
-        setErrMsg('');
-    }, [user, pwd, matchPwd])
-
-    // #endregion
-
 
     // Functions
+    //Axios Communcation
 
     function RegisterUserFunc(
-        //Usernanme
-        user,
-        firstname,
-        surname,
-        email,
-        cellnumber,
-        idNumber,
-        password
         )
        {
+        axios({
+            method: 'post',
+            url: 'http://localhost:8080/v2/user/create',
+            data: {
+                 user: {
+                    
+                 }
+            }})
         console.log(      
-                    //Usernanme  
             user,
             firstname,
             surname,
             email,
             cellnumber,
             idNumber,
-            password);
+            pwd);
     }
+
+
+    function ShowPassword() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }
 
     return (
         <div className="App">
+
             <header >
+            <title>Samanthas Booking Hotel</title>
             </header>
-            <main id="main-holder">
-                <form 
+
+            <html>
+
+            <body>
+            <form 
                 onSubmit={handleSubmit}
                 method='Post'>
 
@@ -137,131 +155,131 @@ function RegisterUser() {
 
                 {/* Add Username field to database */}
                 <label 
-                className=''
-                htmlFor="username">
+                htmlFor="username"
+                className='reg-lbl'>
                             Username:
-                            <FontAwesomeIcon 
-                            //icon={faCheck}
-                             className={validPwd ? "valid" : "hide"}   />
-                            <FontAwesomeIcon 
-                            //icon={faTimes}
-                            className={validPwd || !pwd ? "hide" : "invalid"}  />
                  </label>
                         <input
                             type="text"
                             id="username"
+                            className='reg-form-field'
+                            autoComplete="on"
                             ref={userRef}
-                            autoComplete="off"
                             onChange={(e) => setUser(e.target.value)}
                             value={user}
-                            require
+                            required
                             aria-invalid={validName ? "false" : "true"}
                             aria-describedby="uidnote"
                             onFocus={() => setUserFocus(true)}
                             onBlur={() => setUserFocus(false)}
                         />
+                <br/>
 
-
-                <label htmlFor="firstname">
+                <label htmlFor="firstname"
+                 className='reg-lbl'>
                             First Name:
                  </label>
 
                         <input
                             type="text"
                             id="firstname"
-                            autoComplete="off"
-                            //onChange={(e) => setUser(e.target.value)}
-                            //value={user}
+                            className='reg-form-field'
+                            autoComplete="on"
+                            onChange={(e) => setfirstname(e.target.value)}
+                            value={firstname}
                             required
-                           // aria-describedby="uidnote"
-                           // on                    
-                            //onFocus={() => setUserFocus(true)}
-                            //onBlur={() => setUserFocus(false)}
+                           // aria-describedby="uidnote"                 
+                            onFocus={() => setfirstnameuserFocus(true)}
+                            onBlur={() => setfirstnameuserFocus(false)}
                         />
 
-
-                <label htmlFor="surname">
+                <br/>
+                <label htmlFor="surname"
+                 className='reg-lbl'>
                            Surname:
                  </label>
 
                         <input
                             type="text"
                             id="surname"
-                            autoComplete="off"
-                            //onChange={(e) => setUser(e.target.value)}
-                            //value={user}
+                            className='reg-form-field'
+                            autoComplete="on"
+                            onChange={(e) => setsurname(e.target.value)}
+                            value={surname}
                             required
-                           // aria-describedby="uidnote"
-                           // on                    
-                            //onFocus={() => setUserFocus(true)}
-                            //onBlur={() => setUserFocus(false)}
+                           // aria-describedby="uidnote"                  
+                            onFocus={() => setsurnameFocus(true)}
+                            onBlur={() => setsurnameFocus(false)}
                         />
-
-                <label htmlFor="email">
+                <br/>
+                <label htmlFor="email"
+                 className='reg-lbl'>
                         Email:
                  </label>
 
                         <input
                             type="email"
                             id="email"
-                            autoComplete="off"
-                            //onChange={(e) => setUser(e.target.value)}
-                            //value={user}
-                            required
-                           // aria-describedby="uidnote"
-                           // on                    
-                            //onFocus={() => setUserFocus(true)}
-                            //onBlur={() => setUserFocus(false)}
+                            className='reg-form-field'
+                            autoComplete="on"
+                            onChange={(e) => setemail(e.target.value)}
+                            value={email}
+                            required           
+                            onFocus={() => setemailFocus(true)}
+                            onBlur={() => setemailFocus(false)}
                         />  
+                <br/>
 
-
-                <label htmlFor="cellnumber">
+                <label htmlFor="cellnumber"
+                  className='reg-lbl'>
                         Cell Phone Number:
                  </label>
 
                         <input
                             type="tel"
                             id="cellnumber"
+                            className='reg-form-field'
                             autoComplete="off"
-                            //onChange={(e) => setUser(e.target.value)}
-                            //value={user}
+                            onChange={(e) => setcellnumber(e.target.value)}
+                            value={cellnumber}
                              required
                            // aria-describedby="uidnote"
                            // on                    
-                            //onFocus={() => setUserFocus(true)}
-                            //onBlur={() => setUserFocus(false)}
+                            onFocus={() => setcellnumberFocus(true)}
+                            onBlur={() => setcellnumberFocus(false)}
                         />  
+                <br/>
 
-
-                 <label htmlFor="idNumber">
-                        Cell Phone Number:
+                 <label
+                htmlFor="idNumber"
+                className='reg-lbl'>
+                 ID Number:
                  </label>
 
                         <input
                             type="number"
                             id="idNumber"
+                            className='reg-form-field'
                             autoComplete="off"
-                            //onChange={(e) => setUser(e.target.value)}
-                            //value={user}
+                            onChange={(e) => setidNumber(e.target.value)}
+                            value={idNumber}
                              required
-                           // aria-describedby="uidnote"
-                           // on                    
-                            //onFocus={() => setUserFocus(true)}
-                            //onBlur={() => setUserFocus(false)}
+                           aria-describedby="uidnote"
+                           on                    
+                            onFocus={() => setidNumberFocus(true)}
+                            onBlur={() => setidNumberFocus(false)}
                         />  
 
-                <label htmlFor="password">
+                <br/>
+                <label
+                 htmlFor="password"
+                 className='reg-lbl'>
                             Password:
-                            <FontAwesomeIcon 
-                            //icon={faCheck}
-                             className={validPwd ? "valid" : "hide"}   />
-                            <FontAwesomeIcon 
-                            //icon={faTimes}
-                            className={validPwd || !pwd ? "hide" : "invalid"}  />
                  </label>
                         <input
                             type="password"
                             id="password"
+                            className='reg-form-field'
                             onChange={(e) => setPwd(e.target.value)}
                             value={pwd}
                             required
@@ -270,6 +288,9 @@ function RegisterUser() {
                             onFocus={() => setPwdFocus(true)}
                             onBlur={() => setPwdFocus(false)}
                         />
+                      <label>Show Password</label>  
+                      <input type="checkbox" onclick="ShowPassword()"/>
+                  <br/>
 
                     <i 
                     class="fa fa-info-circle" 
@@ -278,18 +299,35 @@ function RegisterUser() {
                     </i>
 
 
-                    
+                    <br/>
 
-                        <button class="signup-button;" 
-                        onclick={RegisterUserFunc()}>
-                            Signup
-                            </button>
+                    <button 
+                    class="signin-button;" 
+                        onclick={RegisterUserFunc(
+                            {}
+                        )}>
+                           Submit
+                     </button>
                      <br/>
-           
+
+
              </form>
-            <p>Already registered?</p> 
-             <button class="signin-button;">Sign In</button>
-             </main>
+
+             <div>
+             <p>Already registered?</p> 
+            
+             <a href="/login" >
+                 <button  class="signin-button;" >Sign in</button>
+            </a>
+
+             </div>
+
+            </body> 
+
+            <footer>
+
+            </footer>
+            </html>
         </div>
     );
 }

@@ -1,11 +1,10 @@
-
 import './App.css';
 import { useRef, useState, useEffect } from 'react';
 import axios from '../api/axios';
 import React from 'react'
 import { render } from '@testing-library/react';
 import ReactDOM from 'react-dom'
-c//onst LOGIN_URL = '/src/context/AuthProvider.js';
+//onst LOGIN_URL = '/src/context/AuthProvider.js';
 
 
 function LoginUser() {
@@ -13,7 +12,6 @@ function LoginUser() {
       // #region constants
 
     const userRef = useRef();
-
     const errRef = useRef();
 
     const [user, setUser] = useState('');
