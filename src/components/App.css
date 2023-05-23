@@ -1,7 +1,9 @@
-css
+
 
 .App {
   text-align: center;
+  height: 100%;
+  width: 100%;
 }
 
 .App-logo {
@@ -15,6 +17,15 @@ css
   }
 }
 
+.side-bar{
+ float: left; 
+}
+.side-bar-body{
+  float: right;
+}
+.home-body-cons{
+  background-color: #924047;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -42,116 +53,11 @@ css
 
 body{
   background-color:#d0d6e0;
+  background-image:"src/img/Site/hotelBG.jpg";
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-}
-
-.button-div{
-  width:350px;
-  height:60px;
-  border:2px solid #eee;
-  background-color:#b6bdc9;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  border-radius:7px;
-  padding:7px;
-}
-
-.login-button{
-  width:100%;
-  height:55px;
-  border:none;
-  border-radius:5px;
-  font-size:17px;
-  font-weight:600;
-  color:#fff;
-  background-color:#1859c9;
-  cursor:pointer;
-  display: inline;
-}
-
-.login-button:hover{
-
-  background-color:#1859c9db;
-}
-
-.login-lbl{
-  margin: 30px;
-  margin-top:50px ;
-  }
-
-
-.signup-button{
-  width:100%;
-  height:55px;
-  margin:10px;
-  border:none;
-  border-radius:5px;
-  background-color:#e9ecf0;
-  font-size:17px;
-  font-weight:600;
-  cursor:pointer;
-  display: inline;
-}
-
-.signup-button:hover{
-  background-color:#e9ecf0d1;
-}
-
-.signin-button{
-  width:75px;
-  height:30px;
-  margin:10px;
-  border:none;
-  border-radius:2px;
-  background-color:#ecf0e9;
-  font-size:12px;
-  font-weight:600;
-  cursor:pointer;
-  display: inline;
-}
-
-.signin-button:hover{
-
-  background-color:#ebf0e9d1;
-}
-
-/* From */
-
-.lbNote{
-  font-size: x-small;
-  
-}
-
-/* #main-holder {
-  width: 50%;
-  height: 70%;
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  background-color: white;
-  border-radius: 7px;
-  box-shadow: 0px 0px 5px 2px black;
-} */
-
-#login-error-msg {
-  width: 23%;
-  text-align: center;
-  margin: 0;
-  padding: 5px;
-  font-size: 12px;
-  font-weight: bold;
-  color: #8a0000;
-  border: 1px solid #8a0000;
-  background-color: #e58f8f;
-  opacity: 0;
-}
-
-#error-msg-second-line {
-  display: block;
 }
 
 #login-form {
@@ -161,20 +67,67 @@ body{
   align-items: center;
 }
 
+
 .login-form-field::placeholder {
   color: #3a3a3a;
 }
 
 .login-form-field {
-  border: none;
+  border:#282c34;
   border-bottom: 1px solid #3a3a3a;
   margin-bottom: 10px;
   border-radius: 3px;
   outline: none;
   padding: 0px 0px 5px 5px;
+  display: inline;
 }
 
+.btn-register {
+  width: 69%;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: #3a3a3a;
+  cursor: pointer;
+  outline: none;
+}
+
+
+.btn-submit{
+  width: 69%;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: #3a3a3a;
+  cursor: pointer;
+  outline: none;
+}
+
+
+
 #login-form-submit {
+  width: 69%;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: #3a3a3a;
+  cursor: pointer;
+  outline: none;
+}
+
+
+
+
+
+/* Register*/
+
+#register-form-submit {
   width: 100%;
   padding: 7px;
   border: none;
@@ -185,31 +138,22 @@ body{
   cursor: pointer;
   outline: none;
 }
-/* Tooltips */
 
-.tooltip-text {
-  visibility: hidden;
-  position: absolute;
-  z-index: 1;
-  width: 100px;
-  color: white;
-  font-size: 12px;
-  background-color: #192733;
-  border-radius: 10px;
-  padding: 10px 15px 10px 15px;
+
+.reg-form-field{
+  padding-top: 5px;
+  margin: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  align-items: center;
 }
 
-.hover-text:hover .tooltip-text {
-  visibility: visible;
+.reg-lbl{
+align-self: auto;
 }
 
-#top {
-  top: -40px;
-  left: -50%;
+/* Home */
+
+.home-body{
+  background-image: 'src/img/Site/hotelBG.jpg';
 }
-
-/* Rehister */
-
-/* .login-form-field{
-
-} */
