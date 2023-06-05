@@ -5,9 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Edge 3000",
+            "command": "npm start",
+            "name": "Run npm start",
             "request": "launch",
-            "type": "msedge",
+            "type": "node-terminal"
+        },
+        {
+            "name": "Launch firefox",
+            "request": "launch",
+            "type": "firefox",
             "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}"
         },

@@ -8,7 +8,6 @@ import ReactDOM from 'react-dom'
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { IconButton } from '@mui/material';
-//import Background from 'src/img/hotelBG.jpg'
 //onst LOGIN_URL = '/src/context/AuthProvider.js';
 
 
@@ -74,42 +73,97 @@ function LoginUser() {
 
     // #endregion
 
+    function ShowPassword()
+    {
+       debugger
+     var cbshowpass = document.getElementById("cbshowpass");
+     var txtpassword = document.getElementsByClassName("txtpassword")[0];
+
+      if (cbshowpass.checked){
+          txtpassword.type="text"("type", "text");
+      }
+      else {
+          txtpassword.type="password"("type", "passowrd");
+      }
+  }
 
 
-    function ShowPassword(){
-        if ((document.getElementsByClassName("txtpassword")).is(":checked")){
-            document.getElementsByClassName("txtpassword").attr("type", "text");
-        }
-        else {
-            document.getElementsByClassName("txtpassword").attr("type", "passowrd");
-        }
-    }
+//   sendAllData(data) {
+//     return axios.post(API_URL + "receiveData",  JSON.stringify(data), 
+//         { headers: { "Content-Type": "application/json; charset=UTF-8" },
+//         }).then(response=> console.log("repsonse", response.status)) // is 201
 
-    function LoginUserFunc(user, pwd) {
-        console.log(user, pwd);
-        axios.post("http://localhost:8080/v2/user/login", {
-            user: user,
-            password: pwd
-        })
-        .then
-        (
-            function (response)
-            {
-                if(response.status === 200){
-                    alert("User Successfuly Logged in")
-                    window.location.href = '/home';       
-                }
-                console.log(response)
-            } 
-        )
-        .catch
-        (
-            function (error)
-            {
-                console.log(error)
-            } 
-        );
-    }
+
+//   sendAllData(data) {
+//     return axios
+//       .post(API_URL + 'receiveData', JSON.stringify(data), {
+//         headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+//         params: { userId: 2 },
+//       })
+//       .then((response) => console.log('response', response.status));
+//   } // is 201
+
+
+
+function LoginUserFunc(user, pwd) {
+    console.log(user, pwd);
+    axios.post("http://localhost:8080/v2/user/login", {
+        user: user,
+        password: pwd
+        //Check if user exists via Email or ID?
+        //Else prompt existing error
+    })
+    .then
+    (
+        function (response)
+        {
+            if(response.status === 200){
+                alert("User Successfuly Logged in")
+                window.location.href = '/home';       
+            }
+            console.log(response)
+        } 
+    )
+    .catch
+    (
+        function (error)
+        {
+            console.log(error)
+        } 
+    );
+}
+
+    // function LoginUserFunc(user, pwd) {
+    //     //Check if user is existing, Spring call?
+    //     console.log(user, pwd);
+    //     axios.post(
+    //         "http://localhost:8080/v2/user/login" ,
+    //         null,
+    //         {params:{
+    //             //UserID
+    //             user,
+    //             pwd
+    //         }}
+    //     )
+    //     .then
+    //     (
+    //         function (response)
+    //         {
+    //             if(response.status === 200){
+    //                 alert("User Successfuly Logged in")
+    //                 window.location.href = '/home';       
+    //             }
+    //             console.log(response)
+    //         } 
+    //     )
+    //     .catch
+    //     (
+    //         function (error)
+    //         {
+    //             console.log(error)
+    //         } 
+    //     );
+    // }
     return (
         <div className="App">
             <header >
@@ -122,7 +176,7 @@ function LoginUser() {
                 onSubmit={handleSubmit}
                 method='get'
                 >
-                        
+                
                 <h3 id="login-header">
                     Welcome to Samanthas Booking Hotel
                 </h3>
@@ -133,16 +187,15 @@ function LoginUser() {
                     <b>Username:</b>
                 </label>
                 <input
-
                     type="text"
                     id="username"
                     className="login-form-field"
                     placeholder='Enter Username'
                     ref={userRef}
                     autoComplete="off"
+                    required
                     onChange={(e) => setUser(e.target.value)}
                     value={user}
-                    required
                 />
 
                 <label htmlFor="password"
@@ -159,7 +212,7 @@ function LoginUser() {
                     value={pwd}
                     required
                 />
-
+                
                   <label  >
                         Show password
                   </label>

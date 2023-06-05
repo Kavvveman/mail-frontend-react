@@ -1,34 +1,23 @@
-
-
-.App {
-  text-align: center;
-  height: 100%;
-  width: 100%;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.side-bar{
+#side-bar{
+  align-content:flex-start;
+  align-items: flex-end;
  float: left; 
+ background-color: aquamarine;
+ display: inline;
+ width: 30%;
+ height: 100%;
 }
-.side-bar-body{
-  float: right;
+
+
+#side-bar-body{
+  align-content:center;
+  align-items: center;
 }
-.home-body-cons{
-  background-color: #924047;
-}
+
+
+
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #314f61;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,6 +25,8 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+
 
 .App-link {
   color: #61dafb;
@@ -51,15 +42,6 @@
 }
 
 
-body{
-  background-color:#d0d6e0;
-  background-image:"src/img/Site/hotelBG.jpg";
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
 #login-form {
   align-self: flex-start;
   display: grid;
@@ -74,14 +56,13 @@ body{
 
 .login-form-field {
   border:#282c34;
-  border-bottom: 1px solid #3a3a3a;
+  border-bottom: 1px solid #3a3a3ad7;
   margin-bottom: 10px;
   border-radius: 3px;
   outline: none;
   padding: 0px 0px 5px 5px;
   display: inline;
 }
-
 .btn-register {
   width: 69%;
   padding: 5px;
@@ -89,7 +70,7 @@ body{
   border-radius: 5px;
   color: white;
   font-weight: bold;
-  background-color: #3a3a3a;
+  background-color: #686b90;
   cursor: pointer;
   outline: none;
 }
@@ -102,14 +83,17 @@ body{
   border-radius: 5px;
   color: white;
   font-weight: bold;
-  background-color: #3a3a3a;
+  background-color: #66b210bb;
   cursor: pointer;
   outline: none;
 }
 
 
+.BookingsModal{
+  width: 40%;
+}
 
-#login-form-submit {
+/* #login-form-submit {
   width: 69%;
   padding: 5px;
   border: none;
@@ -119,15 +103,9 @@ body{
   background-color: #3a3a3a;
   cursor: pointer;
   outline: none;
-}
+} */
 
-
-
-
-
-/* Register*/
-
-#register-form-submit {
+/* #register-form-submit {
   width: 100%;
   padding: 7px;
   border: none;
@@ -137,23 +115,4 @@ body{
   background-color: #3a3a3a;
   cursor: pointer;
   outline: none;
-}
-
-
-.reg-form-field{
-  padding-top: 5px;
-  margin: 5px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  align-items: center;
-}
-
-.reg-lbl{
-align-self: auto;
-}
-
-/* Home */
-
-.home-body{
-  background-image: 'src/img/Site/hotelBG.jpg';
-}
+} */

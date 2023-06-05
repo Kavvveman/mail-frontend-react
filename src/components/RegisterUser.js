@@ -1,10 +1,19 @@
 import axios from '../api/axios';
 import { useRef, useState, useEffect } from 'react';
-import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { render } from '@testing-library/react';
+
+
+
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 
 
@@ -53,9 +62,9 @@ function RegisterUser() {
     const [valididNumber, setvalididNumber] = useState(false);
     const [idNumberFocus, setidNumberFocus] = useState(false);
 
-    const [userimage, setuserimage] = useState('');
-    const [validuserImage, setvalidUserImage] = useState(false);
-    const [userImageFocus, setUserImageFocus] = useState(false);
+    // const [userimage, setuserimage] = useState('');
+    // const [validuserImage, setvalidUserImage] = useState(false);
+    // const [userImageFocus, setUserImageFocus] = useState(false);
 
     const [username, setusername] = useState('');
     const [validusername, setvalidusername] = useState(false);
@@ -68,35 +77,39 @@ function RegisterUser() {
         }
       };
 
+      function ShowPassword()
+      {
+        debugger
+       var cbshowpass = document.getElementById("cbshowpass");
+       var txtpassword = document.getElementsByClassName("txtpassword")[0];
 
-
-    function ShowPassword(){
-        if ((document.getElementsByClassName("txtpassword")).is(":checked")){
-            document.getElementsByClassName("txtpassword").attr("type", "text");
+        if (cbshowpass.checked){
+            txtpassword.attr("type", "text");
         }
         else {
-            document.getElementsByClassName("txtpassword").attr("type", "passowrd");
+            txtpassword.attr("type", "passowrd");
         }
     }
+
     
     const handleSubmit = async (e) => {
         e.preventDefault();
 
 
-        // console.log(user, firstname, surname, email, cellnumber, idNumber, pwd);
-        //     axios.post("http://localhost:8080/v2/user/create", {
-        //       user: {
-        //         user: user,
-        //         firstname: firstname,
-        //         surname: surname,
-        //         email: email,
-        //         cellNumber: cellnumber,
-        //         idNumber: idNumber,
-        //         password: pwd
-        //       },
-        //     })
-        //     .then(function (response){console.log(response)} )
-        //     .catch(function (error){console.log(error)} );
+        console.log(user, firstname, surname, email, cellnumber, idNumber, pwd);
+            axios.post("http://localhost:8080/v2/user/create", {
+              user: {
+                user: user,
+                firstname: firstname,
+                surname: surname,
+                email: email,
+                cellNumber: cellnumber,
+                idNumber: idNumber,
+                password: pwd
+              },
+            })
+            .then(function (response){console.log(response)} )
+            .catch(function (error){console.log(error)} );
 
         
         // const v1 = USER_REGEX.test(user);
@@ -170,7 +183,7 @@ function RegisterUser() {
                 {
                     if(response.status === 200){
                       alert("User created successfully , Please sign in")
-                      window.location.href = 'src/components/.js';       
+                      window.location.href = '/login';       
                     }
                     console.log(response)
                 } 
@@ -242,8 +255,8 @@ function RegisterUser() {
                             className='reg-form-field'
                             autoComplete="on"
                             ref={userRef}
-                           onChange={(e) => setusername(e.target.value)}
-                            value={user}
+                            onChange={(e) => setusername(e.target.value)}
+                            value={username}
                             required
                             defaultValue="Initial value"
                             aria-invalid={validName ? "false" : "true"}
@@ -267,7 +280,7 @@ function RegisterUser() {
                             value={firstname}
                             required
                             defaultValue="Initial value"
-                           // aria-describedby="uidnote"                 
+                            aria-describedby="uidnote"                 
                             onFocus={() => setfirstnameuserFocus(true)}
                             onBlur={() => setfirstnameuserFocus(false)}
                         />
@@ -286,7 +299,7 @@ function RegisterUser() {
                             value={surname}
                             required
                             defaultValue="Initial value"
-                           // aria-describedby="uidnote"                  
+                            aria-describedby="ui-note"               
                             onFocus={() => setsurnameFocus(true)}
                             onBlur={() => setsurnameFocus(false)}
                         />
@@ -303,7 +316,7 @@ function RegisterUser() {
                             autoComplete="on"
                             onChange={(e) => setemail(e.target.value)}
                             value={email}
-                            required      
+                            required
                             defaultValue="Initial value"     
                             onFocus={() => setemailFocus(true)}
                             onBlur={() => setemailFocus(false)}
@@ -319,10 +332,9 @@ function RegisterUser() {
                             type="tel"
                             id="cellnumber"
                             className='reg-form-field'
-
                             onChange={(e) => setcellnumber(e.target.value)}
                             value={cellnumber}
-                         //  autoComplete="off"
+                            required
                             aria-autocomplete='inline'    
                             defaultValue="Initial value"          
                             onFocus={() => setcellnumberFocus(true)}
@@ -342,8 +354,8 @@ function RegisterUser() {
                             className='reg-form-field'
                             autoComplete="off"
                             onChange={(e) => setidNumber(e.target.value)}
+                            required
                            value={idNumber}
-                           // required
                            aria-describedby="uidnote"   
                            defaultValue="Initial value"       
                             onFocus={() => setidNumberFocus(true)}
@@ -352,7 +364,7 @@ function RegisterUser() {
 
                 <br/>
 
-                <label
+                {/* <label
                 htmlFor="userImage"
                 className='reg-lbl'>
                  Users Image:
@@ -372,8 +384,9 @@ function RegisterUser() {
                             onFocus={() => setUserImageFocus(true)}
                             onBlur={() => setUserImageFocus(false)}
                         />  
-                <br/>
+               */}
 
+                <br/>
                 <label
                  htmlFor="password"
                  className='reg-lbl'>
@@ -418,8 +431,7 @@ function RegisterUser() {
                     type="input"
                     onClick={() =>{RegisterUserFunc()}}
                     className="btn-register" 
-                    handleSubmit=""
-                    >
+                    handleSubmit="">
                     
                            Register
                      </button>
@@ -429,8 +441,7 @@ function RegisterUser() {
             
              <a href="/login" >
                  <button  
-                 className='btn-register'
-                 //id="login-form-submit" 
+                 className='btn-submit'
                  >Sign in
             </button>
             </a>
